@@ -21,17 +21,19 @@ public class PlayerController : MonoBehaviour {
     public Sprite bubbaQmark, notBubba, bubbaFound;
     SpriteRenderer bubbaChildRenderer;
 
-    private void Awake()
-    {
-        
-    }
+    Animator myAnim;
+    SpriteRenderer mySpriteR;
+
     // Use this for initialization
     void Start () {
         marineScripts = FindObjectsOfType<MarineController>();
         myRB = GetComponent<Rigidbody2D>();
+        myAnim = GetComponent<Animator>();
+        mySpriteR = GetComponent<SpriteRenderer>();
         diagonalMove = false;
         dropArea = GameObject.Find("Drop Area(Clone)");
-        bubbaChildRenderer = GameObject.Find("Bubba_ask").GetComponent<SpriteRenderer>();
+        bubbaChildRenderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+
 
         bubbaChildRenderer.enabled = false;
         Invoke("FindMarines", 1f);
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour {
         Movement();
         myRB.WakeUp();
         CheckIfBubba();
+        AnimationBools();
 	}
 
     void Movement()
@@ -60,7 +63,10 @@ public class PlayerController : MonoBehaviour {
         moveV = Input.GetAxisRaw("Vertical");
 
 
-            myRB.velocity = new Vector2(moveH * speed, moveV * speed);
+        myRB.velocity = new Vector2(moveH * speed, moveV * speed);
+
+
+
             
         if (Mathf.Abs(moveH) > 0 && Mathf.Abs(moveV) > 0)
         {
@@ -73,12 +79,54 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
+    
+    void AnimationBools()
+    {
+        if (moveH > 0)
+        {
+            mySpriteR.flipX = true;
+            myAnim.SetBool("Side", true);
+            myAnim.SetBool("Top", false);
+            myAnim.SetBool("Down", false);
+        }
+        else if (moveH < 0)
+        {
+            mySpriteR.flipX = false;
+            myAnim.SetBool("Side", true);
+            myAnim.SetBool("Top", false);
+            myAnim.SetBool("Down", false);
+        }
+        if (moveV > 0)
+        {
+            myAnim.SetBool("Side", false);
+            myAnim.SetBool("Top", true);
+            myAnim.SetBool("Down", false);
+        }
+        else if (moveV < 0)
+        {
+            myAnim.SetBool("Side", false);
+            myAnim.SetBool("Top", false);
+            myAnim.SetBool("Down", true);
+        }
+        if (moveH > 0 && moveV > 0 || moveH > 0 && moveV < 0 || moveH < 0 && moveV > 0 || moveH < 0 && moveV < 0)
+        {
+            myAnim.SetBool("Side", true);
+            myAnim.SetBool("Top", false);
+            myAnim.SetBool("Down", false);
+        }
+        if (moveH == 0 && moveV == 0)
+        {
+            myAnim.SetBool("Side", false);
+            myAnim.SetBool("Top", false);
+            myAnim.SetBool("Down", false);
+        }
+    }
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Marine")
         {
+
             if (!collision.transform.IsChildOf(transform))
             {
                 if (gameObject.transform.childCount > 1)
@@ -89,7 +137,9 @@ public class PlayerController : MonoBehaviour {
                 collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 collision.gameObject.GetComponent<CircleCollider2D>().enabled = false;
                 collision.transform.position = new Vector3(gameObject.transform.position.x + 0.3f, gameObject.transform.position.y + 0.2f, transform.position.z + 0.1f);
+                myAnim.SetBool("Rescue", true);
             }
+
         }
     }
 
@@ -109,11 +159,9 @@ public class PlayerController : MonoBehaviour {
                     {
                         int p = Random.Range(0, dropPositions.Count - 1);
                         child.transform.parent = dropPositions[p].transform;
-                        child.transform.position = new Vector3(dropPositions[p].transform.position.x, dropPositions[p].transform.position.y, transform.position.z);
-                        Destroy(dropPositions[p].GetChild(0).GetComponent<MarineController>());
-                        marineScripts = FindObjectsOfType<MarineController>();
+                        
                         dropPositions.Remove(dropPositions[p]);
-                        Debug.Log(marineScripts.Length);
+                        myAnim.SetBool("Rescue", false);
                         playerHealth += 25;
                         bubbaChildRenderer.enabled = false;
                         if (playerHealth > 100)

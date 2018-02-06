@@ -36,9 +36,9 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            if (reloadingTimer > 2f)
+            if (reloadingTimer > 2.5f)
             {
-                if (bulletTimer > 0.05f && bullets > 0)
+                if (bulletTimer > 0.08f && bullets > 0)
                 {
                     Instantiate(bullet, transform.position, Quaternion.identity);
                     bullets--;
@@ -47,6 +47,4 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
-
-
 }

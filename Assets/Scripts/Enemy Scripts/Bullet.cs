@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour {
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, playerPos, step);
 
-        if (bulletLifetime >= 1.5f)
+        if (bulletLifetime >= 2f)
         {
             Destroy(gameObject);
         }

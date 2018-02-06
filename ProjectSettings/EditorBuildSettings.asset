@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/SaveBubba.unity
+    path: Assets/Scenes/Main Menu.unity
+    guid: d309a4ca7f211294990c96bec6a91159
+  - enabled: 1
+    path: Assets/Scenes/SaveBubba.unity
     guid: f3eaecb55df22ea458969ece0097d952
