@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: PlayerRescue
+  m_Controller: {fileID: 9100000, guid: c9a80d9e9184eba4cac6ac0085d85294, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: f5808bca8bf15ad4cb0e6ba6307c937c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b45118901373f9443b801ba446c7b487, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 470f0a4758fd6f94c9fb79d29146aeb8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 67fd918b476da4c418f90989d7278277, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 36279c4f259f19e41bf35fa4e2d89ae6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4073e1a6ac79e014d9c1b4c9a0aa35bd, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4477b2585322bc94889801679206dbb4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 61aec3d929225d84c9ebc6aa68ca1175, type: 2}

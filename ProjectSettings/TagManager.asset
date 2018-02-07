@@ -7,6 +7,9 @@ TagManager:
   - Marine
   - Drop Area
   - DropSpot
+  - Bubba
+  - Sniper
+  - Infantry
   layers:
   - Default
   - TransparentFX

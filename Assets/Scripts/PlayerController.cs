@@ -22,7 +22,10 @@ public class PlayerController : MonoBehaviour {
     SpriteRenderer bubbaChildRenderer;
 
     Animator myAnim;
+    public AnimatorOverrideController rescueAnim;
+    public AnimatorOverrideController normalAnim;
     SpriteRenderer mySpriteR;
+    
 
     // Use this for initialization
     void Start () {
@@ -31,21 +34,25 @@ public class PlayerController : MonoBehaviour {
         myAnim = GetComponent<Animator>();
         mySpriteR = GetComponent<SpriteRenderer>();
         diagonalMove = false;
-        dropArea = GameObject.Find("Drop Area(Clone)");
+        dropArea = GameObject.Find("Drop Area");
+
         bubbaChildRenderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
-
-
         bubbaChildRenderer.enabled = false;
-        Invoke("FindMarines", 1f);
+
+        FindDropSpots();
         
+        if (playerHealth != 0 && Time.timeScale == 0f)
+        {
+            Time.timeScale = 1f;
+        }
     }
 
-
-    void FindMarines()
+    void FindDropSpots()
     {
         foreach (Transform child in dropArea.transform)
         {
             dropPositions.Add(child);
+            Debug.Log(dropPositions);
         }
     }
 	
@@ -62,12 +69,8 @@ public class PlayerController : MonoBehaviour {
         moveH = Input.GetAxisRaw("Horizontal");
         moveV = Input.GetAxisRaw("Vertical");
 
-
         myRB.velocity = new Vector2(moveH * speed, moveV * speed);
-
-
-
-            
+    
         if (Mathf.Abs(moveH) > 0 && Mathf.Abs(moveV) > 0)
         {
             diagonalMove = true;
@@ -77,7 +80,6 @@ public class PlayerController : MonoBehaviour {
         {
             diagonalMove = false;
         }
-
     }
     
     void AnimationBools()
@@ -122,11 +124,28 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    void CheckIfBubba()
+        {
+            if (gameObject.transform.childCount > 1)
+            {
+                if (gameObject.transform.GetChild(1).tag == "Bubba")
+                {
+                    bubbaChildRenderer.enabled = true;
+                    bubbaChildRenderer.sprite = bubbaFound;
+                }
+                else if (gameObject.transform.GetChild(1).tag != "Bubba")
+                {
+                    bubbaChildRenderer.enabled = true;
+                    bubbaChildRenderer.sprite = notBubba;
+                }
+            }
+         
+        }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Marine")
         {
-
             if (!collision.transform.IsChildOf(transform))
             {
                 if (gameObject.transform.childCount > 1)
@@ -137,9 +156,24 @@ public class PlayerController : MonoBehaviour {
                 collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 collision.gameObject.GetComponent<CircleCollider2D>().enabled = false;
                 collision.transform.position = new Vector3(gameObject.transform.position.x + 0.3f, gameObject.transform.position.y + 0.2f, transform.position.z + 0.1f);
-                myAnim.SetBool("Rescue", true);
+                myAnim.runtimeAnimatorController = rescueAnim;
             }
+        }
 
+        if (collision.gameObject.tag == "Bubba")
+        {
+            if (!collision.transform.IsChildOf(transform))
+            {
+                if (gameObject.transform.childCount > 1)
+                {
+                    return;
+                }
+                collision.transform.parent = gameObject.transform;
+                collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                collision.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                collision.transform.position = new Vector3(gameObject.transform.position.x + 0.3f, gameObject.transform.position.y + 0.2f, transform.position.z + 0.1f);
+                myAnim.runtimeAnimatorController = rescueAnim;
+            }
         }
     }
 
@@ -147,7 +181,8 @@ public class PlayerController : MonoBehaviour {
     {
         if (collision.tag == "Drop Area")
         {
-            if (transform.childCount > 0 )
+            Debug.Log("Inside Drop Area");
+            if (transform.childCount > 1 )
             {
                 foreach (Transform child in transform)
                 {
@@ -155,13 +190,13 @@ public class PlayerController : MonoBehaviour {
                     {
                         return;
                     }
-                    else if (child.transform.name == "Marine(Clone)")
+                    else if (child.transform.tag == "Marine" || child.transform.tag == "Bubba")
                     {
                         int p = Random.Range(0, dropPositions.Count - 1);
                         child.transform.parent = dropPositions[p].transform;
                         
                         dropPositions.Remove(dropPositions[p]);
-                        myAnim.SetBool("Rescue", false);
+                        myAnim.runtimeAnimatorController = normalAnim;
                         playerHealth += 25;
                         bubbaChildRenderer.enabled = false;
                         if (playerHealth > 100)
@@ -174,10 +209,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Marine")
+        if (collision.tag == "Marine" || collision.tag == "Bubba")
         {
             bubbaChildRenderer.enabled = true;
             bubbaChildRenderer.sprite = bubbaQmark;
@@ -186,27 +220,11 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Marine")
+        if (collision.tag == "Marine" || collision.tag == "Bubba")
         {
             bubbaChildRenderer.enabled = false;
         }
     }
 
-    void CheckIfBubba()
-    {
-        if (gameObject.transform.childCount > 1)
-        {
-            if (gameObject.transform.GetChild(1).name == "Bubba")
-            {
-                bubbaChildRenderer.enabled = true;
-                bubbaChildRenderer.sprite = bubbaFound;
-            }
-            else if (gameObject.transform.GetChild(1).name != "Bubba")
-            {
-                bubbaChildRenderer.enabled = true;
-                bubbaChildRenderer.sprite = notBubba;
-            }
-        }
-         
-    }
+    
 }

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4141762663415480}
   - component: {fileID: 114728081614601306}
+  - component: {fileID: 114783617366069316}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -51,9 +52,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8930e3f9e60e854f985d7ba025c9e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 2800000, guid: f1a3ad2cfe6668d4d87957d87be44e9c, type: 3}
+  map: {fileID: 2800000, guid: 528a6decbfc96a4438776bf07d745ab7, type: 3}
   colorMappings:
   - color: {r: 1, g: 0, b: 0, a: 1}
     prefab: {fileID: 1769316531376438, guid: 7c17fadf1a6d4494fb24b5dfb83b178b, type: 2}
-  - color: {r: 0, g: 0.35294116, b: 0, a: 1}
+  - color: {r: 0, g: 0, b: 1, a: 1}
+    prefab: {fileID: 1125398002067362, guid: e71eaa7ebbb57b74292c9b74d0128eb8, type: 2}
+  - color: {r: 0, g: 0.9882353, b: 1, a: 1}
+    prefab: {fileID: 1847888985091666, guid: b18aed6d8cf5d4c4cb032a75e93a7ef7, type: 2}
+  - color: {r: 1, g: 1, b: 0, a: 1}
+    prefab: {fileID: 1650978470630870, guid: 73b8a90fe3298084db579291ad51bef6, type: 2}
+  - color: {r: 0.45490196, g: 0.25882354, b: 0.011764706, a: 1}
+    prefab: {fileID: 1643749794165836, guid: 448085ed623ad7e47943df11e0baff5c, type: 2}
+  - color: {r: 1, g: 0, b: 0.7254902, a: 1}
+    prefab: {fileID: 1768367036680152, guid: d666b1e4e7f80504885986f07e0ffcaa, type: 2}
+--- !u!114 &114783617366069316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1313280840551704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1567602df7ffff54bb28acdaf88748c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 2800000, guid: ffbaed9a011262e45b6cf7bd4995a16a, type: 3}
+  colorMappings:
+  - color: {r: 0, g: 0.3529412, b: 0, a: 1}
     prefab: {fileID: 1378277562002106, guid: 1398d09d1aff30648b67e008c35807bc, type: 2}
+  - color: {r: 0, g: 0, b: 0, a: 1}
+    prefab: {fileID: 1698730308832838, guid: 15ec4f33f50c80949bec04c2124a8a4d, type: 2}
+  - color: {r: 0, g: 1, b: 0, a: 1}
+    prefab: {fileID: 1504590124454224, guid: 89e2df01cc8358243800d1585a61ceb6, type: 2}

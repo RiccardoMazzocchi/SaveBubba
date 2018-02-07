@@ -23,8 +23,9 @@ GameObject:
   - component: {fileID: 114821234224912808}
   - component: {fileID: 82036375851012540}
   - component: {fileID: 58233091160924648}
+  - component: {fileID: 95850033433660300}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy(old)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1768367036680152}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.77, y: 8.63, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.45, y: 15.74, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -138,6 +139,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95850033433660300
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1768367036680152}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e76f4e3efc016834e87ed07f6f8cd8c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114821234224912808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,6 +169,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1706975357260410, guid: 8b9223218d7b07244aa5812e4495a412, type: 2}
   audioSource: {fileID: 0}
+  spriteTop: {fileID: 0}
+  spriteTopRight: {fileID: 0}
+  spriteTopLeft: {fileID: 0}
+  spriteLeft: {fileID: 0}
+  spriteRight: {fileID: 0}
+  spriteBot: {fileID: 0}
+  spriteBotLeft: {fileID: 0}
+  spriteBotRight: {fileID: 0}
 --- !u!212 &212421600798022946
 SpriteRenderer:
   m_ObjectHideFlags: 1

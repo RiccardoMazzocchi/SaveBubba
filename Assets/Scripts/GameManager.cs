@@ -13,12 +13,17 @@ public class GameManager : MonoBehaviour {
     public Text endText;
     public GameObject panel;
 
+    MarineController[] mc;
+
 	// Use this for initialization
 	void Start () {
         uiManager = FindObjectOfType<UIManager>();
         playerController = FindObjectOfType<PlayerController>();
-        Invoke("FindMarines", 2f);
+
+        FindMarines();
         panel.SetActive(false);
+
+        mc = FindObjectsOfType<MarineController>();
     }
 	
 	// Update is called once per frame
@@ -37,11 +42,20 @@ public class GameManager : MonoBehaviour {
             endText.text = "The charlies bit you!";
         }
 
-        if (totalMarines <= 0 && uiManager.gameTimer <= 150f)
+        if (totalMarines <= 7)
+        {
+            mc = FindObjectsOfType<MarineController>();
+            for (int i = 0; i < totalMarines; i++)
+            {
+                mc[i].MarinesToBubba();
+            }
+        }
+
+        if (GameObject.FindGameObjectWithTag("Bubba").GetComponent<MarineController>() == null)
         {
             Time.timeScale = 0f;
             panel.SetActive(true);
-            endText.text = "You saved everyone!";
+            endText.text = "You saved Bubba! Hurray!";
         }
 	}
 
@@ -49,4 +63,6 @@ public class GameManager : MonoBehaviour {
     {
         totalMarines = playerController.marineScripts.Length;
     }
+
+
 }
