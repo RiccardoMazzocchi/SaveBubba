@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 212333011596492832}
   - component: {fileID: 82678054826524940}
   - component: {fileID: 114712675602002086}
-  - component: {fileID: 58624752315269620}
   - component: {fileID: 50010799223180138}
+  - component: {fileID: 61793478700462946}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1917995205963986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.02, y: 24.63, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalPosition: {x: 11.459769, y: 12.764797, z: 0}
+  m_LocalScale: {x: 15, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -64,8 +64,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!58 &58624752315269620
-CircleCollider2D:
+--- !u!61 &61793478700462946
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -77,8 +77,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.31, y: 0.32}
+    newSize: {x: 0.31, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.21
+  m_Size: {x: 0.27, y: 0.26}
+  m_EdgeRadius: 0
 --- !u!82 &82678054826524940
 AudioSource:
   m_ObjectHideFlags: 1
@@ -171,9 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 1bb09f19e882d7f40b40ac5fe9f62435, type: 3}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  explosion: {fileID: 1720592979027136, guid: 96e0a8e87dc512446961fbfe704bf936, type: 2}
 --- !u!212 &212333011596492832
 SpriteRenderer:
   m_ObjectHideFlags: 1

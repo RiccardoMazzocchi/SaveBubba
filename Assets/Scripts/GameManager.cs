@@ -42,21 +42,23 @@ public class GameManager : MonoBehaviour {
             endText.text = "The charlies bit you!";
         }
 
-        if (totalMarines <= 7)
+        if (totalMarines <= 7 && uiManager.gameTimer < 140f)
         {
             mc = FindObjectsOfType<MarineController>();
             for (int i = 0; i < totalMarines; i++)
             {
                 mc[i].MarinesToBubba();
             }
+
+            if (GameObject.FindGameObjectWithTag("Bubba").GetComponent<MarineController>() == null)
+            {
+                Time.timeScale = 0f;
+                panel.SetActive(true);
+                endText.text = "You saved Bubba! Hurray!";
+            }
         }
 
-        if (GameObject.FindGameObjectWithTag("Bubba").GetComponent<MarineController>() == null)
-        {
-            Time.timeScale = 0f;
-            panel.SetActive(true);
-            endText.text = "You saved Bubba! Hurray!";
-        }
+
 	}
 
     void FindMarines ()
