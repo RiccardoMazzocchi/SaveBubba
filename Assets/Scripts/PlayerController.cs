@@ -34,13 +34,13 @@ public class PlayerController : MonoBehaviour {
         myAnim = GetComponent<Animator>();
         mySpriteR = GetComponent<SpriteRenderer>();
         diagonalMove = false;
-        dropArea = GameObject.Find("Drop Area");
+        dropArea = GameObject.FindGameObjectWithTag("Drop Area");
 
         bubbaChildRenderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
         bubbaChildRenderer.enabled = false;
 
         FindDropSpots();
-        
+
         if (playerHealth != 0 && Time.timeScale == 0f)
         {
             Time.timeScale = 1f;
