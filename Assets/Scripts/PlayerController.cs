@@ -181,7 +181,6 @@ public class PlayerController : MonoBehaviour {
     {
         if (collision.tag == "Drop Area")
         {
-            Debug.Log("Inside Drop Area");
             if (transform.childCount > 1 )
             {
                 foreach (Transform child in transform)
