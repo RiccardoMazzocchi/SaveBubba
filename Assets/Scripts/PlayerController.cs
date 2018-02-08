@@ -5,16 +5,25 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     //variables for movement
+    [HideInInspector]
     public float moveH, moveV;
-    public float speed;
+
+    public float maxSpeed;
+    public float minSpeed;
+    [HideInInspector]
+    public float currentSpeed;
+
     Rigidbody2D myRB;
+    [HideInInspector]
     public bool diagonalMove;
 
     //variables for marines
     List<Transform> dropPositions = new List<Transform>();
     GameObject dropArea;
+    [HideInInspector]
     public MarineController[] marineScripts;
 
+    public int maxHealth;
     public int playerHealth;
 
 
@@ -25,7 +34,10 @@ public class PlayerController : MonoBehaviour {
     public AnimatorOverrideController rescueAnim;
     public AnimatorOverrideController normalAnim;
     SpriteRenderer mySpriteR;
-    
+
+    public float maxStamina;
+    [HideInInspector]
+    public float currentStamina;
 
     // Use this for initialization
     void Start () {
@@ -39,7 +51,11 @@ public class PlayerController : MonoBehaviour {
         bubbaChildRenderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
         bubbaChildRenderer.enabled = false;
 
+        playerHealth = maxHealth;
+        currentStamina = maxStamina;
+
         FindDropSpots();
+
 
         if (playerHealth != 0 && Time.timeScale == 0f)
         {
@@ -52,7 +68,6 @@ public class PlayerController : MonoBehaviour {
         foreach (Transform child in dropArea.transform)
         {
             dropPositions.Add(child);
-            Debug.Log(dropPositions);
         }
     }
 	
@@ -69,12 +84,12 @@ public class PlayerController : MonoBehaviour {
         moveH = Input.GetAxisRaw("Horizontal");
         moveV = Input.GetAxisRaw("Vertical");
 
-        myRB.velocity = new Vector2(moveH * speed, moveV * speed);
+        myRB.velocity = new Vector2(moveH * currentSpeed, moveV * currentSpeed);
     
         if (Mathf.Abs(moveH) > 0 && Mathf.Abs(moveV) > 0)
         {
             diagonalMove = true;
-            myRB.velocity = new Vector2(moveH * speed * 0.75f, moveV * speed * 0.75f);
+            myRB.velocity = new Vector2(moveH * currentSpeed * 0.75f, moveV * currentSpeed * 0.75f);
         }
         else
         {
@@ -157,6 +172,7 @@ public class PlayerController : MonoBehaviour {
                 collision.gameObject.GetComponent<CircleCollider2D>().enabled = false;
                 collision.transform.position = new Vector3(gameObject.transform.position.x + 0.3f, gameObject.transform.position.y + 0.2f, transform.position.z + 0.1f);
                 myAnim.runtimeAnimatorController = rescueAnim;
+                currentSpeed = minSpeed - 1.5f;
             }
         }
 
@@ -173,6 +189,7 @@ public class PlayerController : MonoBehaviour {
                 collision.gameObject.GetComponent<CircleCollider2D>().enabled = false;
                 collision.transform.position = new Vector3(gameObject.transform.position.x + 0.3f, gameObject.transform.position.y + 0.2f, transform.position.z + 0.1f);
                 myAnim.runtimeAnimatorController = rescueAnim;
+                
             }
         }
     }
@@ -198,9 +215,10 @@ public class PlayerController : MonoBehaviour {
                         myAnim.runtimeAnimatorController = normalAnim;
                         playerHealth += 25;
                         bubbaChildRenderer.enabled = false;
-                        if (playerHealth > 100)
+                        currentSpeed = minSpeed;
+                        if (playerHealth > maxHealth)
                         {
-                            playerHealth = 100;
+                            playerHealth = maxHealth;
                         }
                     }
                 }

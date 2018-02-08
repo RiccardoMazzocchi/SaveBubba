@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
 
     SpriteRenderer mySR;
 
+    GameObject player;
 
     public Sprite spriteTop, spriteTopRight, spriteTopLeft, spriteLeft, spriteRight, spriteBot, spriteBotLeft, spriteBotRight;
 
@@ -21,7 +22,7 @@ public class EnemyController : MonoBehaviour
     {
         mySR = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
-
+        player = GameObject.FindGameObjectWithTag("Player");
 
         reloadingTimer = 3f;
     }
@@ -83,6 +84,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+
             if (this.gameObject.tag == "Infantry")
             {
                 if (reloadingTimer > 3f)
