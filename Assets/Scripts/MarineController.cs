@@ -21,14 +21,17 @@ public class MarineController : MonoBehaviour {
         {
             if (this.gameObject.transform.parent.tag == "DropSpot")
             {
-                transform.position = Vector3.MoveTowards(transform.position, gameObject.transform.parent.position, 2f * Time.deltaTime);
+                gameObject.GetComponent<Animator>().SetBool("Saved", true);
+                transform.position = Vector3.MoveTowards(transform.position, gameObject.transform.parent.position, 1.2f * Time.deltaTime);
 
             }
             if (transform.position == gameObject.transform.parent.position)
             {
+                gameObject.GetComponent<Animator>().SetBool("Saved", false);
                 Destroy(this);
             }
         }
+        Debug.Log(GM.totalMarines);
     }
 
     public void MarinesToBubba()

@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1847888985091666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.356517, y: 14.8878145, z: 0}
+  m_LocalPosition: {x: 25.24, y: 33.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4052647210659200}
@@ -108,7 +108,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.01}
+  m_Offset: {x: 0, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -119,7 +119,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.58, y: 1.41}
+  m_Size: {x: 0.58, y: 0.96}
   m_EdgeRadius: 0
 --- !u!95 &95029320313354746
 Animator:
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staminaBar: {fileID: 0}
+  staminaBarGO: {fileID: 0}
   reduceStamina: 15
   recoverStamina: 5
 --- !u!114 &114749437219349694
@@ -170,6 +171,7 @@ MonoBehaviour:
   currentSpeed: 0
   diagonalMove: 0
   marineScripts: []
+  marineHolder: {fileID: 0}
   maxHealth: 100
   playerHealth: 100
   bubbaQmark: {fileID: 21300000, guid: dc0a76d3780e7284494c53f442617c19, type: 3}
@@ -192,9 +194,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnValues: {x: 10, y: 2, z: 0}
   bomb: {fileID: 1917995205963986, guid: b81748c5cb5d70b469e43cd614fbbeaa, type: 2}
-  artilletyStart: 15
-  totalBombs: 5
+  artilleryStart: 12
+  totalBombs: 3
   bombDelay: 0.25
+  artilleryText: {fileID: 0}
 --- !u!212 &212067940130498578
 SpriteRenderer:
   m_ObjectHideFlags: 1

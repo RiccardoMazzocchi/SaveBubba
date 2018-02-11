@@ -13,17 +13,39 @@ public class UIManager : MonoBehaviour {
     public float gameTimer = 180f;
     public Text timerText;
 
-
     public Text warningText;
     float warningTimer;
+
+
+    StaminaSystem staminaScript;
+    HealthScript healthScript;
+
 	// Use this for initialization
 	void Start () {
+        staminaScript = FindObjectOfType<StaminaSystem>();
+        healthScript = FindObjectOfType<HealthScript>();
+
         pausePanel.SetActive(false);
-        warningText.text = "You have to find Bubba and bring him to safety!";
+        
+        warningText.text = "Find your friend Bubba and the rest of the squad!";
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Time.timeScale == 0f)
+        {
+            warningText.enabled = false;
+            healthScript.healthBarGO.SetActive(false);
+            staminaScript.staminaBarGO.SetActive(false);
+        }
+        else
+        {
+            warningText.enabled = true;
+            healthScript.healthBarGO.SetActive(true);
+            staminaScript.staminaBarGO.SetActive(true);
+        }
+
         gameTimer -= Time.deltaTime;
         warningTimer += Time.deltaTime;
 
@@ -44,7 +66,7 @@ public class UIManager : MonoBehaviour {
         }
 
 
-        if (warningTimer >= 5f)
+        if (warningTimer >= 2f)
         {
             warningText.GetComponent<Animator>().SetBool("BIG", true);
         }

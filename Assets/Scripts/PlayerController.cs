@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector]
     public MarineController[] marineScripts;
 
+    public GameObject marineHolder;
+
     public int maxHealth;
     public int playerHealth;
 
@@ -39,9 +41,12 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector]
     public float currentStamina;
 
+
+    GameObject tempMarine;
     // Use this for initialization
     void Start () {
-        marineScripts = FindObjectsOfType<MarineController>();
+
+        marineScripts = marineHolder.transform.GetComponentsInChildren<MarineController>();
         myRB = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
         mySpriteR = GetComponent<SpriteRenderer>();
@@ -73,10 +78,18 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Movement();
+        GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(transform.position.y) * -1;
+
+        if (Time.timeScale > 0f)
+        {
+            Movement();
+            AnimationBools();
+
+            marineScripts = marineHolder.transform.GetComponentsInChildren<MarineController>();
+        }
         myRB.WakeUp();
         CheckIfBubba();
-        AnimationBools();
+        
 	}
 
     void Movement()
@@ -170,6 +183,8 @@ public class PlayerController : MonoBehaviour {
                 collision.transform.parent = gameObject.transform;
                 collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 collision.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                tempMarine = collision.gameObject;
+                tempMarine.GetComponent<SpriteRenderer>().enabled = false;
                 collision.transform.position = new Vector3(gameObject.transform.position.x + 0.3f, gameObject.transform.position.y + 0.2f, transform.position.z + 0.1f);
                 myAnim.runtimeAnimatorController = rescueAnim;
                 currentSpeed = minSpeed - 1.5f;
@@ -187,6 +202,8 @@ public class PlayerController : MonoBehaviour {
                 collision.transform.parent = gameObject.transform;
                 collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 collision.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                tempMarine = collision.gameObject;
+                tempMarine.GetComponent<SpriteRenderer>().enabled = false;
                 collision.transform.position = new Vector3(gameObject.transform.position.x + 0.3f, gameObject.transform.position.y + 0.2f, transform.position.z + 0.1f);
                 myAnim.runtimeAnimatorController = rescueAnim;
                 
@@ -208,14 +225,16 @@ public class PlayerController : MonoBehaviour {
                     }
                     else if (child.transform.tag == "Marine" || child.transform.tag == "Bubba")
                     {
+                        
+                        tempMarine.GetComponent<SpriteRenderer>().enabled = true;
                         int p = Random.Range(0, dropPositions.Count - 1);
                         child.transform.parent = dropPositions[p].transform;
-                        
                         dropPositions.Remove(dropPositions[p]);
                         myAnim.runtimeAnimatorController = normalAnim;
                         playerHealth += 25;
                         bubbaChildRenderer.enabled = false;
                         currentSpeed = minSpeed;
+                        tempMarine = null;
                         if (playerHealth > maxHealth)
                         {
                             playerHealth = maxHealth;

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class StaminaSystem : MonoBehaviour {
 
     public Slider staminaBar;
+    public GameObject staminaBarGO;
     PlayerController playerController;
 
     public float reduceStamina;
@@ -16,10 +17,16 @@ public class StaminaSystem : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         playerController = FindObjectOfType<PlayerController>();
-	}
+        staminaBarGO = staminaBar.gameObject;
+        staminaBarGO.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {
+
+
+
+
         staminaBar.value = playerController.currentStamina;
 
         if (Input.GetKey(KeyCode.LeftShift) && playerController.currentStamina >= 0f && depletedStamina == false)
@@ -60,5 +67,5 @@ public class StaminaSystem : MonoBehaviour {
         {
             playerController.currentStamina = playerController.maxStamina;
         }
-	}
+    }
 }

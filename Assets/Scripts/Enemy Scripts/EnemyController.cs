@@ -7,10 +7,9 @@ public class EnemyController : MonoBehaviour
 
     float reloadingTimer;
     float bulletTimer;
-    int bullets = 20;
+    int bullets;
     public GameObject bullet;
-    public AudioSource audioSource;
-
+    AudioSource audioSource;
     SpriteRenderer mySR;
 
     GameObject player;
@@ -25,6 +24,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
 
         reloadingTimer = 3f;
+        
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
         if (bullets == 0)
         {
             reloadingTimer = 0f;
-            bullets = 20;
+            bullets = 25;
         }
 
         LookRotation();
@@ -89,9 +89,10 @@ public class EnemyController : MonoBehaviour
             {
                 if (reloadingTimer > 3f)
                 {
-                    if (bulletTimer > 0.08f && bullets > 0)
+                    if (bulletTimer > 0.05f && bullets > 0)
                     {
                         Instantiate(bullet, transform.position, Quaternion.identity);
+                        audioSource.PlayOneShot(audioSource.clip);
                         bullets--;
                         bulletTimer = 0f;
                     }
@@ -103,6 +104,7 @@ public class EnemyController : MonoBehaviour
                 {
                     Instantiate(bullet, transform.position, Quaternion.identity);
                     reloadingTimer = 0f;
+                    audioSource.Play();
                 }
             }
         }

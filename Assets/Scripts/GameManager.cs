@@ -20,10 +20,10 @@ public class GameManager : MonoBehaviour {
         uiManager = FindObjectOfType<UIManager>();
         playerController = FindObjectOfType<PlayerController>();
 
-        FindMarines();
         panel.SetActive(false);
 
         mc = FindObjectsOfType<MarineController>();
+        
     }
 	
 	// Update is called once per frame
@@ -57,9 +57,9 @@ public class GameManager : MonoBehaviour {
                 endText.text = "You saved Bubba! Hurray!";
             }
         }
+        FindMarines();
 
-
-	}
+    }
 
     void FindMarines ()
     {

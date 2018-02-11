@@ -10,6 +10,7 @@ TagManager:
   - Bubba
   - Sniper
   - Infantry
+  - NoArtillery
   layers:
   - Default
   - TransparentFX
