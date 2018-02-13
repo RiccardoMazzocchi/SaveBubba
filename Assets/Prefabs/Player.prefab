@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114774681614045224}
   - component: {fileID: 95029320313354746}
   - component: {fileID: 114404328827728790}
+  - component: {fileID: 82653065833013366}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -69,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1847888985091666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.24, y: 33.83, z: 0}
+  m_LocalPosition: {x: 41.649998, y: 51.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4052647210659200}
@@ -121,6 +122,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.58, y: 0.96}
   m_EdgeRadius: 0
+--- !u!82 &82653065833013366
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1847888985091666}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.35
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95029320313354746
 Animator:
   serializedVersion: 3
@@ -152,7 +233,7 @@ MonoBehaviour:
   staminaBar: {fileID: 0}
   staminaBarGO: {fileID: 0}
   reduceStamina: 15
-  recoverStamina: 5
+  recoverStamina: 7.5
 --- !u!114 &114749437219349694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,8 +247,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveH: 0
   moveV: 0
-  maxSpeed: 5
-  minSpeed: 3
+  maxSpeed: 7
+  minSpeed: 4
   currentSpeed: 0
   diagonalMove: 0
   marineScripts: []
@@ -181,6 +262,16 @@ MonoBehaviour:
   normalAnim: {fileID: 22100000, guid: f8bbf18a78a51b849a128cac5d99ae5f, type: 2}
   maxStamina: 100
   currentStamina: 0
+  footstepsLight:
+  - {fileID: 8300000, guid: 8f269409b90d224429732668ab40bf79, type: 3}
+  - {fileID: 8300000, guid: 5909a30e5e7cd8349b6ba088956b6473, type: 3}
+  - {fileID: 8300000, guid: aa4769411d7c6b744a8a9203d92e5d2e, type: 3}
+  - {fileID: 8300000, guid: 4f86fd0808a73394488b6eb8587f2878, type: 3}
+  - {fileID: 8300000, guid: b02f92c2989c1f142bd8247ca5f0972e, type: 3}
+  - {fileID: 8300000, guid: 3eae564e381986942a2428f80acadb70, type: 3}
+  - {fileID: 8300000, guid: 7167461852ae24041ac7749e77975a5f, type: 3}
+  - {fileID: 8300000, guid: 10c2f564616c9e64b9d3adf371b96ca3, type: 3}
+  audioSource: {fileID: 0}
 --- !u!114 &114774681614045224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -192,8 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d41f596f1f918245ae664e3bf6d025a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnValues: {x: 10, y: 2, z: 0}
-  bomb: {fileID: 1917995205963986, guid: b81748c5cb5d70b469e43cd614fbbeaa, type: 2}
+  spawnValues: {x: 6, y: 2, z: 0}
+  bomb: {fileID: 1597185553942780, guid: 99c1535628c373941b992d764ec06874, type: 2}
   artilleryStart: 12
   totalBombs: 3
   bombDelay: 0.25
@@ -231,7 +322,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -900
   m_Sprite: {fileID: 21300000, guid: 7c87d843a3343a3468ecaa4fb41f7d7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

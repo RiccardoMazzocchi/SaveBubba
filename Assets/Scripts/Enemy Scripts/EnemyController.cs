@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
         if (bullets == 0)
         {
             reloadingTimer = 0f;
-            bullets = 25;
+            bullets = 20;
         }
 
         LookRotation();

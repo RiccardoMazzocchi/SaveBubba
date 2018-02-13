@@ -7,12 +7,12 @@ public class MarineController : MonoBehaviour {
     PlayerController playerController;
     GameManager GM;
 
-
+    MarineController[] mc;
     // Use this for initialization
-	void Start () {
+    void Start () {
         playerController = FindObjectOfType<PlayerController>();
         GM = FindObjectOfType<GameManager>();
-	}
+    }
 
     // Update is called once per frame
     void Update()
@@ -32,6 +32,7 @@ public class MarineController : MonoBehaviour {
             }
         }
         Debug.Log(GM.totalMarines);
+
     }
 
     public void MarinesToBubba()
@@ -39,10 +40,21 @@ public class MarineController : MonoBehaviour {
         gameObject.tag = "Bubba";
     }
 
+
+
     private void OnDestroy()
     {
         playerController.marineScripts = FindObjectsOfType<MarineController>();
         GM.totalMarines--;
-        Debug.Log(GM.totalMarines);  
+        Debug.Log(GM.totalMarines);
+        if (this.gameObject.tag == "Bubba")
+        {
+            Time.timeScale = 0f;
+            GameManager.instance.panel.SetActive(true);
+            GameManager.instance.endText.text = "You saved Booba! Hurray!";
+        }
     }
+
+
+    
 }

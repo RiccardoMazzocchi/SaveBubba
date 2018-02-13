@@ -31,8 +31,10 @@ public class StaminaSystem : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.LeftShift) && playerController.currentStamina >= 0f && depletedStamina == false)
         {
+
             playerController.currentStamina -= reduceStamina * Time.deltaTime;
             playerController.currentSpeed = playerController.maxSpeed;
+            playerController.audioSource.pitch = 1.4f;
             if (playerController.gameObject.transform.childCount > 1)
             {
                 playerController.currentSpeed = playerController.maxSpeed * 0.75f;
@@ -46,6 +48,7 @@ public class StaminaSystem : MonoBehaviour {
         {
             playerController.currentStamina += recoverStamina * Time.deltaTime;
             playerController.currentSpeed = playerController.minSpeed;
+            playerController.audioSource.pitch = 1.15f;
             if (playerController.gameObject.transform.childCount > 1)
             {
                 playerController.currentSpeed = playerController.minSpeed * 0.75f;

@@ -7,45 +7,56 @@ public class PlayerController : MonoBehaviour {
     //variables for movement
     [HideInInspector]
     public float moveH, moveV;
-
+    [Header("Movement")]
     public float maxSpeed;
     public float minSpeed;
     [HideInInspector]
     public float currentSpeed;
-
-    Rigidbody2D myRB;
     [HideInInspector]
     public bool diagonalMove;
+    Rigidbody2D myRB;
 
     //variables for marines
     List<Transform> dropPositions = new List<Transform>();
     GameObject dropArea;
     [HideInInspector]
     public MarineController[] marineScripts;
-
     public GameObject marineHolder;
 
+    [Header("Health")]
     public int maxHealth;
+    [HideInInspector]
     public int playerHealth;
 
-
+    [Header("Bubba")]
     public Sprite bubbaQmark, notBubba, bubbaFound;
     SpriteRenderer bubbaChildRenderer;
 
     Animator myAnim;
+    [Header("Animator")]
     public AnimatorOverrideController rescueAnim;
     public AnimatorOverrideController normalAnim;
     SpriteRenderer mySpriteR;
 
+    [Header("Stamina")]
     public float maxStamina;
     [HideInInspector]
     public float currentStamina;
 
-
     GameObject tempMarine;
+
+    [Header("Sound")]
+    public AudioClip[] footstepsLight;
+    bool carryingMarine;
+    [HideInInspector]
+    public AudioSource audioSource;
+
+    bool foundBubbaText;
     // Use this for initialization
     void Start () {
 
+        carryingMarine = false;
+        audioSource = GetComponent<AudioSource>();
         marineScripts = marineHolder.transform.GetComponentsInChildren<MarineController>();
         myRB = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
@@ -89,7 +100,11 @@ public class PlayerController : MonoBehaviour {
         }
         myRB.WakeUp();
         CheckIfBubba();
-        
+
+        if (playerHealth == 0)
+        {
+            Time.timeScale = 0f;
+        }
 	}
 
     void Movement()
@@ -98,7 +113,16 @@ public class PlayerController : MonoBehaviour {
         moveV = Input.GetAxisRaw("Vertical");
 
         myRB.velocity = new Vector2(moveH * currentSpeed, moveV * currentSpeed);
-    
+
+        if (Mathf.Abs(moveH) > 0 || Mathf.Abs(moveV) > 0)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = footstepsLight[Random.Range(0, footstepsLight.Length)];
+                audioSource.Play();
+            }
+        }
+
         if (Mathf.Abs(moveH) > 0 && Mathf.Abs(moveV) > 0)
         {
             diagonalMove = true;
@@ -187,12 +211,14 @@ public class PlayerController : MonoBehaviour {
                 tempMarine.GetComponent<SpriteRenderer>().enabled = false;
                 collision.transform.position = new Vector3(gameObject.transform.position.x + 0.3f, gameObject.transform.position.y + 0.2f, transform.position.z + 0.1f);
                 myAnim.runtimeAnimatorController = rescueAnim;
-                currentSpeed = minSpeed - 1.5f;
+                currentSpeed = minSpeed - 1.25f;
+                carryingMarine = true;
             }
         }
 
         if (collision.gameObject.tag == "Bubba")
         {
+            foundBubbaText = true;
             if (!collision.transform.IsChildOf(transform))
             {
                 if (gameObject.transform.childCount > 1)
@@ -206,7 +232,7 @@ public class PlayerController : MonoBehaviour {
                 tempMarine.GetComponent<SpriteRenderer>().enabled = false;
                 collision.transform.position = new Vector3(gameObject.transform.position.x + 0.3f, gameObject.transform.position.y + 0.2f, transform.position.z + 0.1f);
                 myAnim.runtimeAnimatorController = rescueAnim;
-                
+                carryingMarine = true;
             }
         }
     }
@@ -231,7 +257,7 @@ public class PlayerController : MonoBehaviour {
                         child.transform.parent = dropPositions[p].transform;
                         dropPositions.Remove(dropPositions[p]);
                         myAnim.runtimeAnimatorController = normalAnim;
-                        playerHealth += 25;
+                        //playerHealth += 10;
                         bubbaChildRenderer.enabled = false;
                         currentSpeed = minSpeed;
                         tempMarine = null;

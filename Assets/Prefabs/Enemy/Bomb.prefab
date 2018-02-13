@@ -24,8 +24,8 @@ GameObject:
   - component: {fileID: 114712675602002086}
   - component: {fileID: 50010799223180138}
   - component: {fileID: 61793478700462946}
-  - component: {fileID: 95847223126368762}
   - component: {fileID: 111028230563193254}
+  - component: {fileID: 95012190287283708}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -171,7 +171,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!95 &95847223126368762
+--- !u!95 &95012190287283708
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -180,7 +180,7 @@ Animator:
   m_GameObject: {fileID: 1917995205963986}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3d080fe1dd75c5f449cefbce4a3b5238, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -199,7 +199,7 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 19a6ba56c17914445a7906cdae8369b3, type: 2}
   m_Animations: []
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &114712675602002086

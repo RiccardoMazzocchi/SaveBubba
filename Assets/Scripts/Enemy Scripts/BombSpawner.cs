@@ -18,7 +18,6 @@ public class BombSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        artilleryText.SetActive(false);
         artilleryTimer = 0f;
         currentBombs = totalBombs;
 	}
@@ -29,14 +28,9 @@ public class BombSpawner : MonoBehaviour {
         artilleryTimer += Time.deltaTime;
         bombTimer += Time.deltaTime;
 
-        if (artilleryTimer >= artilleryStart - 5f)
-        {
-            artilleryText.SetActive(true);
-        }
 		if (artilleryTimer >= artilleryStart)
         {
             BombSpray();
-            artilleryText.SetActive(false);
         }
         if (currentBombs <= 0)
         {

@@ -14,9 +14,9 @@ public class Bomb : MonoBehaviour {
 
     public GameObject explosion;
 
-    Animation bombAnim;
+    Animator myAnim;
     float timer;
-
+    bool exploded;
     // Use this for initialization
     void Start () {
         playerController = FindObjectOfType<PlayerController>();
@@ -24,7 +24,10 @@ public class Bomb : MonoBehaviour {
         StartCoroutine("ChangeZ");
         //StartCoroutine("Explosion");
         //StartCoroutine("Disappear");
-        bombAnim = GetComponent<Animation>();
+        myAnim = GetComponent<Animator>();
+        
+
+
     }
 	
 	// Update is called once per frame
@@ -33,23 +36,23 @@ public class Bomb : MonoBehaviour {
 
 
         timer += Time.deltaTime;
-        if (bombLifetime >= bombAnim.clip.length)
+        if (timer > 3.8f)
         {
             Destroy(gameObject);
         }
 
-        if (bombLifetime >= bombAnim.clip.length - 0.5f)
+        if (timer > 3.05f && !exploded)
         {
-            GameObject explInst = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y + -1f, transform.position.z - 9f), Quaternion.identity);
+            GameObject explInst = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, transform.position.z - 9f), Quaternion.identity);
             explInst.GetComponent<SpriteRenderer>().sortingOrder = 0;
-
-            CameraShake.Shake(0.15f, 0.3f);
+            CameraShake.Shake(0.2f, 0.4f);
+            exploded = true;
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (bombLifetime >= bombAnim.clip.length -0.5f && bombLifetime <= bombAnim.clip.length)
+        if (timer > 3.05f && timer < 3.5f)
         {
             if (collision.tag == "Player" && isHit == false)
             {
@@ -76,17 +79,4 @@ public class Bomb : MonoBehaviour {
         transform.position = zPosition;
         gameObject.GetComponent<SpriteRenderer>().sortingOrder = -999;
     }
-
-    /*IEnumerator Explosion()
-    {
-        yield return new WaitForSeconds(3.5f);
-        Instantiate(explosion, new Vector3(transform.position.x, transform.position.y + -2f, transform.position.z - 4f), Quaternion.identity);
-        CameraShake.Shake(0.2f, 0.5f);
-    }
-
-    IEnumerator Disappear()
-    {
-        yield return new WaitForSeconds(3.75f);
-        gameObject.GetComponent<SpriteRenderer>().sprite = null;
-    }*/
 }

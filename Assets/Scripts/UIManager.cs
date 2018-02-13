@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour {
 
     bool isPaused;
 
-    public float gameTimer = 180f;
+    public float gameTimer = 211f;
     public Text timerText;
 
     public Text warningText;
@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour {
 
         pausePanel.SetActive(false);
         
-        warningText.text = "Find your friend Bubba and the rest of the squad!";
+        warningText.text = "Find your friend Booba and the rest of the squad!";
     }
 	
 	// Update is called once per frame
@@ -38,12 +38,14 @@ public class UIManager : MonoBehaviour {
             warningText.enabled = false;
             healthScript.healthBarGO.SetActive(false);
             staminaScript.staminaBarGO.SetActive(false);
+            warningText.enabled = false;
         }
         else
         {
             warningText.enabled = true;
             healthScript.healthBarGO.SetActive(true);
             staminaScript.staminaBarGO.SetActive(true);
+            warningText.enabled = true;
         }
 
         gameTimer -= Time.deltaTime;

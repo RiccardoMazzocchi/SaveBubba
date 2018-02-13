@@ -65,8 +65,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1898741325253506}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.08, y: 17.876, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 37.243256, y: 18.408978, z: 0.37948388}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4534105885429156}
@@ -97,9 +97,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 207cd8b01802eaa448bb8ba083bc7555, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 58cc4ce2ef081bc458546e5574b334ca, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.092
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -181,11 +181,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1706975357260410, guid: 8b9223218d7b07244aa5812e4495a412, type: 2}
   spriteTop: {fileID: 21300000, guid: 1706d06bddbabb440862f6079ea8e627, type: 3}
-  spriteTopRight: {fileID: 21300000, guid: 8dbff250108dac14da39c85528290af9, type: 3}
-  spriteTopLeft: {fileID: 21300000, guid: 8dbff250108dac14da39c85528290af9, type: 3}
+  spriteTopRight: {fileID: 21300000, guid: c4243d0e116be714eb3b1561bad6add5, type: 3}
+  spriteTopLeft: {fileID: 21300000, guid: 33187f269ae88a3479ec01634490e700, type: 3}
   spriteLeft: {fileID: 21300000, guid: 197a70ce1e03153458cc781a23b0ca21, type: 3}
   spriteRight: {fileID: 21300000, guid: 4860890f173681545bb4e5c077964c72, type: 3}
-  spriteBot: {fileID: 21300000, guid: 8dbff250108dac14da39c85528290af9, type: 3}
+  spriteBot: {fileID: 21300000, guid: 8170b5a66e13e084fbaa59fdb0c0cd74, type: 3}
   spriteBotLeft: {fileID: 21300000, guid: ad373a403ed005f48b4895287247cb5d, type: 3}
   spriteBotRight: {fileID: 21300000, guid: 97d506d43437f0f4c8cffb0f94dbbef0, type: 3}
 --- !u!114 &114853976201337680

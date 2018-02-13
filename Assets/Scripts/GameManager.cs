@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+
+    public static GameManager instance;
+
     UIManager uiManager;
     PlayerController playerController;
 
@@ -15,15 +18,25 @@ public class GameManager : MonoBehaviour {
 
     MarineController[] mc;
 
+    public bool marinesConverted;
 	// Use this for initialization
 	void Start () {
+
+        marinesConverted = false;
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+
         uiManager = FindObjectOfType<UIManager>();
         playerController = FindObjectOfType<PlayerController>();
 
         panel.SetActive(false);
 
         mc = FindObjectsOfType<MarineController>();
-        
+
+        Invoke("FindMarines", 1f);
     }
 	
 	// Update is called once per frame
@@ -32,7 +45,7 @@ public class GameManager : MonoBehaviour {
         {
             Time.timeScale = 0f;
             panel.SetActive(true);
-            endText.text = "You couldn't find Bubba before the airstrike :(";
+            endText.text = "You couldn't find Booba before the airstrike :(";
         }
 
         if (playerController.playerHealth <= 0)
@@ -42,23 +55,14 @@ public class GameManager : MonoBehaviour {
             endText.text = "The charlies bit you!";
         }
 
-        if (totalMarines <= 7 && uiManager.gameTimer < 140f)
+        if (totalMarines <= 6)
         {
             mc = FindObjectsOfType<MarineController>();
             for (int i = 0; i < totalMarines; i++)
             {
                 mc[i].MarinesToBubba();
             }
-
-            if (GameObject.FindGameObjectWithTag("Bubba").GetComponent<MarineController>() == null)
-            {
-                Time.timeScale = 0f;
-                panel.SetActive(true);
-                endText.text = "You saved Bubba! Hurray!";
-            }
         }
-        FindMarines();
-
     }
 
     void FindMarines ()
